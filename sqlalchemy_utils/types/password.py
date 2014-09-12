@@ -125,6 +125,10 @@ class PasswordType(types.TypeDecorator, ScalarCoercible):
                 "'passlib' is required to use 'PasswordType'"
             )
 
+        # Set default schemes if not passed
+        if "schemes" not in kwargs.keys():
+            kwargs["schemes"] = ["pbkdf2_sha512"]
+
         # Construct the passlib crypt context.
         self.context = CryptContext(**kwargs)
 
